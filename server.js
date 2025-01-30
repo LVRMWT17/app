@@ -59,7 +59,7 @@ app.post('/login', (req, res) => {
                 console.error('An error', err);
                 return res.status(500).json({ message: 'Authentication failed.' });
             }
-            res.json({ message: 'Successfully'})
+            return res.json({ message: 'Successfully'})
     });
 });
 })
