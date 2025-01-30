@@ -10,7 +10,7 @@ const PORT = process.env.PORT;
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
-app.get('/', (_req, res) => {
+app.get('/public', (_req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'Login.html')); // Или перенаправьте на другую страницу
 });
 app.get('/api/login', (_req, res) => {
