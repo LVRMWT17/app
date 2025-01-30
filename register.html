@@ -111,7 +111,7 @@
             const firstName = document.getElementById('firstName').value;
             const lastName = document.getElementById('lastName').value;
             const registrationTime = new Date().toISOString().slice(0, 19).replace('T', ' ');
-            const response = await fetch('/register', {
+            const response = await fetch('/api/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
