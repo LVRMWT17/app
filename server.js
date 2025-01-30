@@ -4,14 +4,14 @@ import { fileURLToPath } from 'url';
 import { createConnection } from 'mysql2';
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = path.dirname(__filename, 'public);
 const app = express();
 const PORT = process.env.PORT;
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.get('/public', (_req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'Login.html')); // Или перенаправьте на другую страницу
+    res.sendFile(path.join(__dirname, 'public', 'Login.html'));
 });
 app.get('/api/login', (_req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'Login.html'));
