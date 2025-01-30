@@ -4,22 +4,24 @@ import { fileURLToPath } from 'url';
 import { createConnection } from 'mysql2';
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename, 'public);
+const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = process.env.PORT;
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
-app.get('/public', (_req, res) => {
+app.get('/', (_req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'Login.html'));
 });
-app.get('/api/login', (_req, res) => {
+app.get('/public/Login.html', (_req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'Login.html'));
 });
-app.get('/api/register', (_req, res) => {
+app.get('/public/register.html', (_req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'register.html'));
 });
-
+app.all('*', (_req, res) => {
+    res.status(404).send('404 Not Found');
+});
 const db = createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -35,7 +37,7 @@ db.connect(err => {
     }
     console.log('Successfully');
 });
-app.post('/login', (req, res) => {
+app.post('/api/login', (req, res) => {
     const { email, password } = req.body;
 
     db.query('SELECT * FROM users2 WHERE email = ?', [email], (error, results) => {
@@ -64,7 +66,7 @@ app.post('/login', (req, res) => {
     });
 });
 });
-app.post('/register', (req, res) => {
+app.post('/api/register', (req, res) => {
     const { email, password, firstName, lastName, registrationTime } = req.body;
     const checkQuery = 'SELECT * FROM users2 WHERE email = ?';
     db.execute(checkQuery, [email], (err, results) => {
