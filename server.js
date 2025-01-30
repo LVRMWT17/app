@@ -20,7 +20,7 @@ app.get('/register', (_req, res) => {
     res.sendFile(path.join(__dirname, 'register.html'));
 });
 
-const connection = createConnection({
+const db = createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASS,
