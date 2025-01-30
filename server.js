@@ -20,11 +20,12 @@ app.get('/register', (_req, res) => {
     res.sendFile(path.join(__dirname, 'register.html'));
 });
 
-const db = createConnection({
-    host: 'localhost',
-    user: 'ValLuc7',
-    password: 'LeraLera7$',
-    database: 'jsmysql'
+const connection = createConnection({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT,
 });
 
 db.connect(err => {
