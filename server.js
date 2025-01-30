@@ -9,15 +9,15 @@ const app = express();
 const PORT = process.env.PORT;
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname)));
+app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', (_req, res) => {
-    res.sendFile(path.join(__dirname, 'Login.html')); // Или перенаправьте на другую страницу
+    res.sendFile(path.join(__dirname, 'public', 'Login.html')); // Или перенаправьте на другую страницу
 });
-app.get('/login', (_req, res) => {
-    res.sendFile(path.join(__dirname, 'Login.html'));
+app.get('/api/login', (_req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'Login.html'));
 });
-app.get('/register', (_req, res) => {
-    res.sendFile(path.join(__dirname, 'register.html'));
+app.get('/api/register', (_req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'register.html'));
 });
 
 const db = createConnection({
@@ -65,7 +65,7 @@ app.post('/login', (req, res) => {
 });
 })
 
-app.get('/table.html', (_req, res) => {
+app.get('/public/table.html', (_req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'table.html'));
 });
 
